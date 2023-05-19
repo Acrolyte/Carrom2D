@@ -1,16 +1,16 @@
-# Carrom Game
+# Carrom2D
 
 ## Overview
 
-Carrom Game is a single-player game developed in Unity, optimized for portrait screen orientation, and scalable on all devices. The game replicates the popular tabletop game of Carrom, where the player aims to pocket all the pucks using a striker.
+Carrom2D is a single-player game developed in Unity, optimized for portrait screen orientation, and scalable on all devices. The game replicates the popular tabletop game of Carrom, where the player aims to pocket all the pucks using a striker.
 
 ## Game Elements
-The following game elements are incorporated in the Carrom Game:
+The following game elements are incorporated in the Carrom2D:
 - **Striker**: The player can drag the striker behind to charge the power of the shot and release it in the desired direction.
 - **Pucks**: There are 8 black pucks, 8 white pucks, and 1 red queen. The objective is to pocket all the pucks using the striker.
 
 ## Game Mechanics
-The game mechanics of Carrom Game include:
+The game mechanics of Carrom2D include:
 
 - **Power**: The player can charge the power of the shot by dragging the striker behind and release it in the desired direction to hit the pucks.
 - **Physics**: The game follows general physics rules, ensuring realistic puck movement and collisions.
