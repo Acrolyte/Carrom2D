@@ -16,6 +16,7 @@ public class ComputerAim : MonoBehaviour
     [SerializeField]
     Transform circles;
 
+    bool playSound = true;
 
     private void Start()
     {
@@ -28,6 +29,21 @@ public class ComputerAim : MonoBehaviour
         GamePlay();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log($"Collision detected with {collision.gameObject.name}");
+        if (collision.gameObject.GetComponent<Puck_Value>() != null && playSound && collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.2f)
+        {
+            playSound = false;
+            Invoke("SoundActive", 2);
+            //Debug.Log("Play Sound");
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+    }
+    private void SoundActive()
+    {
+        playSound = true;
+    }
 
     public void GamePlay()
     {

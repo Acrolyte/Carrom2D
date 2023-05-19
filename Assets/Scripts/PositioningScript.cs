@@ -15,8 +15,7 @@ public class PositioningScript : MonoBehaviour
     [SerializeField]
     Transform StrikerBg;
 
-    [SerializeField]
-    bool StrikerAim;
+    bool StrikerAim, playSound = true;
 
     RaycastHit2D hit;
 
@@ -27,6 +26,7 @@ public class PositioningScript : MonoBehaviour
 
     private void OnEnable()
     {
+        slider.value = 0;
         helperCollider.SetActive(false);
         sliderHider.SetActive(false);
         StrikerBg.localScale = Vector3.zero;
@@ -39,17 +39,21 @@ public class PositioningScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    //Debug.Log($"Collision detected with {collision.gameObject.name}");
-    //    if (collision.gameObject.GetComponent<Puck_Value>() != null && playSound)
-    //    {
-    //        playSound = false;
-    //        Invoke("SoundActive", 3);
-    //        //Debug.Log("Play Sound");
-    //        gameObject.GetComponent<AudioSource>().Play();
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log($"Collision detected with {collision.gameObject.name}");
+        if (collision.gameObject.GetComponent<Puck_Value>() != null && playSound && collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > 0.2f)
+        {
+            playSound = false;
+            Invoke("SoundActive", 2);
+            //Debug.Log("Play Sound");
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+    }
+    private void SoundActive()
+    {
+        playSound = true;
+    }
 
     void GiveTurn()
     {
@@ -93,7 +97,7 @@ public class PositioningScript : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             rb.AddForce(new Vector3(circles.position.x - transform.position.x, circles.position.y - transform.position.y, 0) * 2000);
-           
+            sliderHider.SetActive(true);
             StrikerBg.localScale = Vector3.zero;
             if (rb.velocity.magnitude < 0.2f && StrikerAim)
             {
@@ -103,7 +107,7 @@ public class PositioningScript : MonoBehaviour
             }
             StrikerAim = false;
 
-            sliderHider.SetActive(true);
+            
         }
 
     }
